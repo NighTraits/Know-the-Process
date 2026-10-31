@@ -1,12 +1,20 @@
+from uuid import uuid4
 import streamlit as st
 from models.data_schema import IContent
+
+@st.dialog(" ", width="small", dismissible=False)
+def pop_up_message(title: str, message: str)-> None:
+    st.header(title, text_alignment="center")
+    st.text(message, text_alignment="center", width="stretch")
+    
+    if st.button("Close"):
+        st.session_state["df_key"] = str(uuid4())
+        st.rerun()
 
 
 @st.dialog(" ", width="large")
 def data_detail_dialog(row: IContent) -> None:
-
     st.header(row.title, text_alignment="center")
-
     tab1, tab2, tab3 = st.tabs(["Descripción", "Indicaciones", "Observaciones"])
 
     with tab1.container(horizontal=False):

@@ -1,8 +1,11 @@
+from uuid import uuid4
+from components import pop_up_message
 import streamlit as st
 import pandas as pd
 from components import data_detail_dialog
 from models import IContent
 from pydantic import TypeAdapter
+
 
 st.set_page_config(
     page_title="Archive",
@@ -11,26 +14,38 @@ st.set_page_config(
 
 st.header("Archive")
 
-event = st.dataframe(
-    pd.DataFrame(st.session_state.data)[["title", "location", "source", "updated_at"]],
-    key="table-tramites",
-    column_config={
-        "title": st.column_config.TextColumn(label="Trámite"),
-        "location": st.column_config.TextColumn(label="Ubicación"),
-        "source": st.column_config.LinkColumn(
-            label="Sitio", width="small", display_text="link"
-        ),
-        "updated_at": st.column_config.DateColumn(
-            label="Modificado",
-        ),
-    },
-    column_order=("title", "location", "updated_at", "source"),
-    hide_index=True,
-    on_select="rerun",
-    selection_mode="single-row",
-    use_container_width=True,
-)
+if not st.session_state.data:
+    st.info("No data found.")
+else:
+    if "df_key" not in st.session_state:
+        st.session_state["df_key"] = str(uuid4())
 
-if len(rows := event.selection.rows) > 0:
-    data = TypeAdapter(IContent).validate_python(st.session_state.data[rows[0]])
-    data_detail_dialog(data)
+    event = st.dataframe(
+        pd.DataFrame(st.session_state.data)[["title", "location", "source", "updated_at"]],
+        key=st.session_state["df_key"],
+        column_config={
+            "title": st.column_config.TextColumn(label="Trámite"),
+            "location": st.column_config.TextColumn(label="Ubicación"),
+            "source": st.column_config.LinkColumn(
+                label="Sitio", width="small", display_text="link"
+            ),
+            "updated_at": st.column_config.DateColumn(
+                label="Modificado",
+            ),
+        },
+        column_order=("title", "location", "updated_at", "source"),
+        hide_index=True,
+        on_select="rerun",
+        selection_mode="single-row",
+        width="stretch",
+    )
+
+    if len(rows := event.selection.rows) > 0:
+        idx = rows[0]
+        if idx > len(st.session_state.data):
+            pop_up_message("Error", "Dato no encontrado")
+        else:
+            data = TypeAdapter(IContent).validate_python(st.session_state.data[idx])
+            data_detail_dialog(data)
+            
+        

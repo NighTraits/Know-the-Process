@@ -26,3 +26,12 @@ for chat in st.session_state.chat_history:
 if prompt := st.chat_input("Input your question here..."):
     st.chat_message(ROLE.USER).write(prompt)
     st.session_state.chat_history.append(IChat(role=ROLE.USER, message=prompt))
+
+if st.session_state.chat_history and (last_msg:=st.session_state.chat_history[-1]).role == ROLE.USER:
+    # add loading icon
+    
+    # query model with last message by user 
+    # use try catch
+    # last_msg.message
+    
+    pass    
