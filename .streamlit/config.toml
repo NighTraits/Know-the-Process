@@ -1,0 +1,22 @@
+[global]
+disableWidgetStateDuplicationWarning = false
+showWarningOnDirectExecution = true
+
+[logger]
+level = "info"
+messageFormat = "%(asctime)s %(message)s"
+
+[client]
+showErrorDetails = "full"
+toolbarMode = "auto"
+showSidebarNavigation = false
+showErrorLinks = "auto"
+disableDataExport = false
+
+[theme]
+base="light"
+primaryColor="forestGreen"
+backgroundColor="white"
+secondaryBackgroundColor="#29b09d"
+codeBackgroundColor="powderBlue"
+textColor="#065022"
