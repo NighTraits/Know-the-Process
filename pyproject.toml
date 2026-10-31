@@ -54,6 +54,9 @@ exclude = [
     "**/.*",
 ]
 
+[tool.poetry]
+package-mode = false
+
 # [server]
 # enableXsrfProtection = true
 # enableCORS = true
