@@ -1,2 +1,2 @@
-from .rag import RAG
+from .rag import *
 from .db import *

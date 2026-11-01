@@ -1,15 +1,17 @@
 import json
 import re
+import asyncio
 from typing import Any
 from dataclasses import asdict
 from pathlib import Path
-from playwright.async_api import Page
-from playwright.async_api._generated import Locator
-import asyncio
-from playwright.async_api import async_playwright
-from models import IContent
 from datetime import date
 from pathlib import Path
+
+from playwright.async_api import Page
+from playwright.async_api._generated import Locator
+from playwright.async_api import async_playwright
+
+from models import IContent
 from uuid import uuid4
 
 

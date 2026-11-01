@@ -1,11 +1,8 @@
 
-from pydantic import TypeAdapter
 import json
 from pathlib import Path
-from models.data_schema import IContent
 
-
-def get_data()-> list[IContent] | None:
+def get_data()-> dict[str, str] | None:
     
     STORE = Path("static/db.json")
     if not STORE.exists():
@@ -13,7 +10,7 @@ def get_data()-> list[IContent] | None:
     
     data = json.loads(STORE.read_text())
     
-    return TypeAdapter(list[IContent]).validate_python(data)
+    return data
     
     
     

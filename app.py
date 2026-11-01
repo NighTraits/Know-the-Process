@@ -1,6 +1,7 @@
+import streamlit as st
+
 from state import init_state
 from streamlit.navigation.page import Page
-import streamlit as st
 
 st.set_page_config(
     page_title="Know the Process",

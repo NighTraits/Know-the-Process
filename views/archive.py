@@ -1,10 +1,11 @@
-from uuid import uuid4
-from components import pop_up_message
 import streamlit as st
+
 import pandas as pd
-from components import data_detail_dialog
-from models import IContent
+from uuid import uuid4
 from pydantic import TypeAdapter
+
+from models import IContent
+from components import pop_up_message, data_detail_dialog
 
 
 st.set_page_config(
@@ -16,10 +17,12 @@ st.header("Archive")
 
 if not st.session_state.data:
     st.info("No data found.")
+    
 else:
     if "df_key" not in st.session_state:
         st.session_state["df_key"] = str(uuid4())
-
+        
+    # Archive table    
     event = st.dataframe(
         pd.DataFrame(st.session_state.data)[["title", "location", "source", "updated_at"]],
         key=st.session_state["df_key"],
@@ -48,4 +51,3 @@ else:
             data = TypeAdapter(IContent).validate_python(st.session_state.data[idx])
             data_detail_dialog(data)
             
-        
