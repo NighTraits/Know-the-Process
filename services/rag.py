@@ -6,11 +6,15 @@ from langchain_core.documents import Document
 from langchain_chroma import Chroma, vectorstores
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 
+from models.chat_schema import KEY
+
+
+
 @st.cache_resource
 def get_vectorstore() -> Chroma:
-    embeddings = GoogleGenerativeAIEmbeddings(model="gemini-embedding-001")
+    embeddings = GoogleGenerativeAIEmbeddings(model=st.session_state[KEY.EMBEDDING])
     return Chroma(
-        collection_name=st.secrets["COLLECTION"],
+        collection_name=st.session_state[KEY.COLLECTION],
         embedding_function=embeddings,
         persist_directory="./chroma_db",
     )
@@ -25,9 +29,9 @@ def prompt_agent(question: str) -> str:
         """Search the database for records relevant to the query."""
         results: list[Document] = vector_store.similarity_search(query, k=3)
         return "\n\n---\n\n".join(d.page_content for d in results) or "No results."
-
     
-    model = ChatGoogleGenerativeAI(model=st.secrets["CHAT_MODEL"])
+    
+    model = ChatGoogleGenerativeAI(model=st.session_state[KEY.AGENT])
     
     agent = create_agent(
         model=model,

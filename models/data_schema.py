@@ -1,11 +1,10 @@
 from datetime import date
 from dataclasses import dataclass
-from uuid import UUID
 
 
 @dataclass
 class IContent:
-    id: UUID
+    id: str
     title: str
     description: str
     location: str
