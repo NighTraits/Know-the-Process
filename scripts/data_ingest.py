@@ -93,7 +93,7 @@ class DataIngest:
 
         self._tramites.append(
             IContent(
-                id=uuid4(),
+                id=str(uuid4()),
                 title=title,
                 description=desc,
                 location=location,

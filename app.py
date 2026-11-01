@@ -5,7 +5,7 @@ from streamlit.navigation.page import Page
 
 st.set_page_config(
     page_title="Know the Process",
-    layout="wide",
+    layout="wide"
 )
 st.logo("static/logo.svg", size="large")
 
@@ -16,7 +16,8 @@ init_state()
 pages: list[Page] = [
     st.Page("views/home.py", title="Home", icon=":material/home:", default=True),
     st.Page("views/chat.py", title="Chat", icon=":material/chat:"),
-    st.Page("views/archive.py", title="Archive", icon=":material/book:"),
+    st.Page("views/archive.py", title="Trámites", icon=":material/book:", url_path="tramites"),
+    st.Page("views/details.py", url_path="tramite", visibility="hidden"),
     st.Page("views/about.py", title="About Us", icon=":material/person:"),
 ]
 

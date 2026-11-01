@@ -31,7 +31,7 @@ def create_chroma() -> None:
         Store db.json data in a chroma vector, to be used by the model.
     """
     model: str = os.getenv("EMBEDDING_MODEL") or ""
-    os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY") or ""
+    os.environ["GOOGLE_API_KEY"] = os.getenv("API_KEY") or ""
     collection_name = os.getenv("COLLECTION") or ""
     
     embeddings = GoogleGenerativeAIEmbeddings(model=model)
