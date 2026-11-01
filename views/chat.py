@@ -32,6 +32,6 @@ if prompt := st.chat_input("Input your question here..."):
 
 # Agent prompt with last message by user
 if st.session_state.chat_history and (last_msg:=st.session_state.chat_history[-1]).role == ROLE.USER:
-    st.spinner()
     response = prompt_agent(last_msg.message)
     st.session_state.chat_history.append(IChat(role=ROLE.ASSISTANT, message=response))
+    st.rerun()

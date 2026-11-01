@@ -27,7 +27,7 @@ def prompt_agent(question: str) -> str:
         return "\n\n---\n\n".join(d.page_content for d in results) or "No results."
 
     
-    model = ChatGoogleGenerativeAI(model=st.secrets["CHAT_MODEL"], temperature=0.2)
+    model = ChatGoogleGenerativeAI(model=st.secrets["CHAT_MODEL"])
     
     agent = create_agent(
         model=model,

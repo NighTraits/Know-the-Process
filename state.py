@@ -21,4 +21,7 @@ def init_state() -> None:
         st.session_state.df_key = str(uuid4())
         
     if not os.environ.get("GOOGLE_API_KEY"):
-        os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
+        if not (key:=st.secrets["GOOGLE_API_KEY"]):
+            st.toast("No se encontró al clave de Gemini.", icon="/material:error/")
+        else:
+            os.environ["GOOGLE_API_KEY"] = key
