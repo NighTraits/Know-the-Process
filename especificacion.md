@@ -31,10 +31,8 @@
 
 
 ## 2. Qué hace la app
-1. Responde una pregunta sobre un trámite, disponible en la base de datos, al usuario.
-2. Especifica cómo es el proceso para realizar el trámite especificado.
-3. Responde qué institución se encarga de realizar el trámite especificado.
-4. Comparte la dirección web para conocer más información del trámite especificado.
+1. Busca que trámite va acorde a la pregunta del usuario.
+2. Provee las indicaciones y con que institución se realizar el trámite.
 5. Responde que no sabe cuando el trámite especificado no se encuentra en la base de datos.
 
 
@@ -45,11 +43,16 @@
     - **Usuario**: "¿Qué debo hacer para sacar mi cédula por primera vez?"
     - **Agente**: *\*provee texto sobre los requisitos del trámite e institución encargada\**
 
-## 4. ¿Qué pieza de IA usa? - RAG
 
-1. Embedding con ``gemini-embedding-001``, para la generación del Chroma, cada vez que se actualiza el [db.json](/static/db.json). Esta se queda en el repositorio para evitar el consumo masivo de token, en ingesta del documento, por cada consulta al agente.
+## 4. ¿Qué pieza de IA usa? - RAG
+1. Embedding con ``gemini-embedding-001``, para la generación del Chroma, cada vez que se actualiza el [db.json](/static/db.json). Esta se queda en el repositorio para evitar el consumo masivo de token, en ingesta del documento, por cada despliegue de la applicación.
 2. Embedding con ``gemini-embedding-001`` para la búsqueda semántica con respecto al Chroma.
-3. Redacción con ```gemini-3.5-flash-lite```.
+3. Redacción con ```gemini-3.5-flash-lite```. Es con el que se ha estado usando a lo largo de las actividades.
+4. Instrucciones para el modelo (system prompt):
+    - Responde en español usando SOLO lo que se encuentra en el database.
+    - Siempre usa la tool () de busqueda en la database antes de responder.
+    - Solo usa información recibida de la tool.
+    - Si no se encuentra una respuesta, di que no sabes.
 
 ## 5. Flujo del usuario
 1. El usuario entra y ver la página principal.
@@ -59,10 +62,13 @@
 
 
 ## 6. Restricciones
-- Responde en español usando SOLO lo que se encuentra en el database.
-- Siempre usa la tool () de busqueda en la database antes de responder.
-- Solo usa información recibida de la tool.
-- Si no se encuentra una respuesta, di que no sabes.
+- Coste cero: capa gratuita de la API y despliegue gratuito en Streamlit Community Cloud.
+- La clave de la API va en secretos, nunca en el código.
+- Sin datos personales reales.
+- Lenguaje sencillo, para alguien sin conocimientos técnicos.
+- Límite de 100 documentos en la base de datos.
+
+
 
 ## 7. Criterios de aceptación
 | Entrada | Resultado esperado |
@@ -71,8 +77,10 @@
 | "¿Dónde puedo comprar una escavadora?" | Di que esa información no corresponde a trámites gubernamentales. |
 | Clave inválida | mensaje claro, sin traza de error en pantalla. |
 
+
 ## 8. Fuera de alcance
 Existe ~2.5k de traḿites en la página del gobierno. Si bien, se puede lograr localmente con el [data_ingest.py](/scripts/data_ingest.py), esta data es masiva en comparación con los tokens disponibles. Dado el caso, se movería a un vector DB como tal.
+
 
 ## 9. Despliegue
 Streamlit Community Cloud

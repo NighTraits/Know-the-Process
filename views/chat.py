@@ -6,16 +6,11 @@ from services import prompt_agent
 
 
 def page():
-    with st.container(horizontal=True, horizontal_alignment="right"):
-        st.button(
-            label="limpiar historial",
-            key="btn-clear-chat",
-            on_click=clear_chat_history,
-        )
 
     # Chat history
-    for chat in st.session_state[KEY.CHAT_HISTORY]:
-        st.chat_message(chat.role).write(chat.message)
+    with st.container():
+        for chat in st.session_state[KEY.CHAT_HISTORY]:
+            st.chat_message(chat.role).write(chat.message)
 
 
     # Chat input box
@@ -32,8 +27,30 @@ def page():
         
     
 if __name__=="__main__":
+    
     st.set_page_config(page_title="Chat", page_icon=":material/chat:")
-    st.title("Chat")
+    
+    st.markdown("""
+    <style>
+    [data-testid="stLayoutWrapper"]:has(> .st-key-sticky_header) {
+        position: sticky;
+        top: 60px;
+        z-index: 10;
+        background-color: #D2DCB6
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+    )
+    
+    with st.container(horizontal=True, horizontal_alignment="right", key="sticky_header"):
+        st.title("Chat")
+        st.button(
+            label="limpiar historial",
+            key="btn-clear-chat",
+            on_click=clear_chat_history,
+        )
+        
     
     requirements = [
         KEY.EMBEDDING,

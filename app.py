@@ -18,7 +18,6 @@ pages: list[Page] = [
     st.Page("views/chat.py", title="Chat", icon=":material/chat:"),
     st.Page("views/archive.py", title="Trámites", icon=":material/book:", url_path="tramites"),
     st.Page("views/details.py", url_path="tramite", visibility="hidden"),
-    st.Page("views/about.py", title="About Us", icon=":material/person:"),
 ]
 
 # Navigation Bar

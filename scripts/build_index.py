@@ -8,6 +8,8 @@ from langchain_core.documents.base import Document
 from langchain_chroma import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
+from static.constants import COLLECTION, EMBEDDING_MODEL
+
 load_dotenv(".streamlit/secrets.toml")
 
 def load_documents(path: Path) -> list[Document]:
@@ -30,9 +32,9 @@ def create_chroma() -> None:
     """
         Store db.json data in a chroma vector, to be used by the model.
     """
-    model: str = os.getenv("EMBEDDING_MODEL") or ""
+    model: str = EMBEDDING_MODEL or ""
     os.environ["GOOGLE_API_KEY"] = os.getenv("API_KEY") or ""
-    collection_name = os.getenv("COLLECTION") or ""
+    collection_name = COLLECTION or ""
     
     embeddings = GoogleGenerativeAIEmbeddings(model=model)
     docs: list[Document] = load_documents(Path("static/db.json"))
