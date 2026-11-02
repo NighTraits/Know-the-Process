@@ -15,6 +15,7 @@ class IChat:
 class KEY(StrEnum):
     API_KEY = "API_KEY"
     GOOGLE_API_KEY = "GOOGLE_API_KEY"
+    
     EMBEDDING = "EMBEDDING_MODEL"
     AGENT = "AGENT_MODEL"
     COLLECTION = "COLLECTION"
