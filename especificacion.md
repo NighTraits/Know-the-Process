@@ -33,7 +33,7 @@
 ## 2. Qué hace la app
 1. Busca que trámite va acorde a la pregunta del usuario.
 2. Provee las indicaciones y con que institución se realizar el trámite.
-5. Responde que no sabe cuando el trámite especificado no se encuentra en la base de datos.
+3. Responde que no sabe cuando el trámite especificado no se encuentra en la base de datos.
 
 
 ## 3. Entradas y salidas
@@ -69,11 +69,10 @@
 - Límite de 100 documentos en la base de datos.
 
 
-
 ## 7. Criterios de aceptación
 | Entrada | Resultado esperado |
 | --- | --- |
-| "¿Cómo sé si en mi terreno es fertil?" | Di que puede realizar un Análisis de Fertilidad de Suelo. |
+| "¿Cómo puedo obtener mi cédula por primera vez?" | Di que debe ir al Tribunal Electoral con una copia de la cédula de la madre o del padre. |
 | "¿Dónde puedo comprar una escavadora?" | Di que esa información no corresponde a trámites gubernamentales. |
 | Clave inválida | mensaje claro, sin traza de error en pantalla. |
 

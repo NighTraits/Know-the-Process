@@ -16,8 +16,8 @@ def pop_up_message(title: str, message: str)-> None:
 @st.dialog(" ", width="small")
 def validation_message(
     title: str, 
-    message: str, 
-    on_accept: Callable[[str], None]
+    on_accept: Callable[[], None],
+    message: str | None = "",
 ):
     st.subheader(title, text_alignment="center")
     st.text(message, text_alignment="center", width="stretch")
@@ -27,5 +27,5 @@ def validation_message(
             st.rerun()
             
         if st.button("Aceptar"):
-            on_accept(message)
+            on_accept()
             st.rerun()
