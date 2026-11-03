@@ -10,10 +10,10 @@ def redirect_to_chat(prompt: str):
     st.switch_page("views/chat.py")
     
 def on_pill_change():
-    value: str | None = st.session_state.get("action_pills")
+    value: str | None = st.session_state.get("prompt_pills")
     if value is not None:
         st.session_state["prompt_from_home"] = value
-        st.session_state.action_pills = None
+        st.session_state.prompt_pills = None
 
 def page():    
     st.text("Bienvenido a")
@@ -25,12 +25,12 @@ def page():
     
     
     # Options
-    st.text("Preguntas")
+    st.text("Prueba el agente con las siguientes preguntas:")
     with st.container(horizontal=False,width="content", border=True):
         st.pills(
             " ",
             options=PROMPTS,
-            key="action_pills",
+            key="prompt_pills",
             width=800,
             on_change=on_pill_change,
         )
@@ -39,7 +39,7 @@ def page():
         
         if pending is not None:
             validation_message(
-                "¿ Deseas consultar la siguiente pregunta al agente?", 
+                "¿Deseas consultar la siguiente pregunta al agente?", 
                 pending,
                 redirect_to_chat,
             )

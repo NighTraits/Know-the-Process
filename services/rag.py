@@ -45,7 +45,7 @@ def prompt_agent(question: str) -> str:
             "Responde en español usando SOLO lo que se encuentra en el database."
             "Siempre usa la tool de busqueda en la database antes de responder."
             "Solo usa información recibida de la tool."
-            "Si no se encuentra una respuesta, di 2no sé."
+            "Si no se encuentra una respuesta, dí que no sabes."
         ),
     )
 
