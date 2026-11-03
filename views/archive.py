@@ -45,7 +45,7 @@ def page(data_raw: list[IContent]) -> None:
     # replace with redirect link
     data = generate_link_column(data_raw)
 
-    # filters
+    # filters        
     data = set_filters(data)
 
     if not data:
@@ -80,6 +80,12 @@ def page(data_raw: list[IContent]) -> None:
     )
 
 if __name__=="__main__":
+    
+    location_id = st.query_params.get("locationId")
+    
+    if location_id:
+        st.session_state["select-search"] = location_id
+        st.switch_page("views/archive.py")
     
     st.set_page_config(page_title="Archive", page_icon=":material/book:")
     st.title("Trámites")

@@ -13,8 +13,8 @@ Asistente que responde consultas con respecto a procesos de traḿites gubername
     - views/details.py
     - views/home.py
 - Interfaz: Streamlit, desplegada en Streamlit Community Cloud.
-- IA: `Langchain-google-genai` y `langchain-chroma`. Los dos modelos están en las constantes `AGENT_MODELAGENT_MODEL` y `EMBEDDING_MODEL`.
-- Búsqueda semántica sobre a la base de datos vectorial úbicado en `chroma_db/` bajo la constante `COLLECTION`.
+- IA: `Langchain-google-genai` y `langchain-chroma`. Los dos modelos se encuentran en el secrets bajo el nombre de `AGENT_MODEL` y `EMBEDDING_MODEL`.
+- Búsqueda semántica sobre a la base de datos vectorial úbicado en `chroma_db/`. El nombre de la colección se encuentra en el secrets bajo el nombre de `COLLECTION`.
 - Archivos: `app.py`, `pyproject.toml` y este fichero. La especificación completa está en `especificacion.md`, léela antes de proponer cambios.
 
 
