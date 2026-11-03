@@ -14,13 +14,12 @@ showErrorLinks = "auto"
 disableDataExport = false
 
 [theme]
+base="light"
 primaryColor="#A3B087"
 linkColor="#E16A54"
 buttonRadius="#E16A54"
 buttonColor="#E16A54"
 borderColor="#A3B087"
-
-[theme.light]
 backgroundColor="#D2DCB6"
 textColor="#313647"
 secondaryBackgroundColor="#F1F3E0"
@@ -28,9 +27,17 @@ dataframeBorderColor="#313647"
 dataframeHeaderBackgroundColor="#F1F3E0"
 dataframeHeaderTextColor="#313647"
 
-[theme.dark]
-textColor="#D2DCB6"
-backgroundColor="#313647"
-dataframeBorderColor="#D2DCB6"
-dataframeHeaderBackgroundColor="#435663"
-dataframeHeaderTextColor="#D2DCB6"
+# [theme.light]
+# backgroundColor="#D2DCB6"
+# textColor="#313647"
+# secondaryBackgroundColor="#F1F3E0"
+# dataframeBorderColor="#313647"
+# dataframeHeaderBackgroundColor="#F1F3E0"
+# dataframeHeaderTextColor="#313647"
+
+# [theme.dark]
+# textColor="#D2DCB6"
+# backgroundColor="#313647"
+# dataframeBorderColor="#D2DCB6"
+# dataframeHeaderBackgroundColor="#435663"
+# dataframeHeaderTextColor="#D2DCB6"

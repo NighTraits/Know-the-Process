@@ -14,7 +14,6 @@ from playwright.async_api import async_playwright
 from models import IContent
 from uuid import uuid4
 
-
 class DataIngest:
     def __init__(self) -> None:
         self._links: list[str] = []
@@ -29,12 +28,16 @@ class DataIngest:
             )
             page = await context.new_page()
 
-            await self.get_link(page)
-
-            for link in self._links:
+            for idx, link in enumerate(self._links):
+                if "panamadigital.gob.pa" not in link:
+                    continue
+                
                 await self.get_info(page, link)
                 await page.wait_for_timeout(2000)
-
+                
+                if idx > 0 and idx % 20 == 0:
+                    self.save_as(Path("static/db.json"))
+                    
             self.save_as(Path("static/db.json"))
 
             await browser.close()
@@ -48,11 +51,19 @@ class DataIngest:
             list_pages: list[Locator] = await page.locator(
                 "div.contenedor-tramites li.list-group-item > a"
             ).all()
+            
+            if len(list_pages) < 1:
+                break
 
             for lp in list_pages:
                 self._links.append(await lp.evaluate("el => el.href"))
 
             await page.wait_for_timeout(3000)
+        
+        with open("static/site_links.txt", "w") as file:
+            for i in self._links:
+                file.write(f"{i}\n")
+            
 
     async def get_info(self, page: Page, site: str) -> None:
         await page.goto(site)

@@ -12,7 +12,6 @@ def page():
         for chat in st.session_state[KEY.CHAT_HISTORY]:
             st.chat_message(chat.role).write(chat.message)
 
-
     # Chat input box
     if prompt := st.chat_input("Input your question here..."):
         st.chat_message(EROLE.USER).write(prompt)
@@ -43,14 +42,13 @@ if __name__=="__main__":
     unsafe_allow_html=True,
     )
     
-    with st.container(horizontal=True, horizontal_alignment="right", key="sticky_header"):
+    with st.container(horizontal=True, key="sticky_header"):
         st.title("Chat")
         st.button(
             label="limpiar historial",
             key="btn-clear-chat",
             on_click=clear_chat_history,
         )
-        
     
     requirements = [
         KEY.EMBEDDING,
